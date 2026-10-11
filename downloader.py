@@ -8,6 +8,11 @@ import sys
 import argparse
 import yt_dlp
 
+# Windows cp1252 karakter kodlama hatalarını önle
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 def get_ffmpeg_path() -> str | None:
     """Sistemde veya imageio-ffmpeg kütüphanesinde bulunan ffmpeg yolunu döndürür."""
     try:
@@ -41,6 +46,11 @@ def download_media(
         "outtmpl": out_tmpl,
         "quiet": False,
         "no_warnings": False,
+        "extractor_args": {
+            "youtube": {
+                "player_client": ["android", "ios", "mweb"]
+            }
+        },
     }
 
     if ffmpeg_exe:

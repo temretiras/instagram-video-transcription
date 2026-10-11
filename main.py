@@ -16,6 +16,12 @@ Kullanım:
 import os
 import sys
 import argparse
+
+# Windows cp1252 karakter kodlama hatalarını önle
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 from downloader import download_media
 from transcribe import transcribe_with_whisper
 

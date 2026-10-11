@@ -23,6 +23,7 @@ instagram-video-transcription/
 ├── requirements.txt       # Gerekli Python bağımlılıkları (yt-dlp, imageio-ffmpeg, whisper)
 ├── .gitignore             # Medya dosyalarını Git'ten hariç tutar
 └── transcripts/
+    ├── historik49_cagdaslasma_sekulerizm_cumhuriyet.md # YouTube: ESG Historik 49 (52 dk)
     ├── historik14_diktator_franco_ispanya_ic_savasi.md # YouTube: ESG Historik 14 (45 dk)
     ├── part1_obsidian_ikinci_beyin.md                  # Instagram: İkinci Beyin Part 1
     ├── part2_otomasyon_telegram_whisper.md             # Instagram: İkinci Beyin Part 2
@@ -80,6 +81,7 @@ python transcribe.py downloads/esczqaVKf-I.mp3 --model base --language tr --outp
 
 ## 📜 Hazır Transkriptler
 
+- **[Historik 49 - Çağdaşlaşma, Sekülerizm ve Cumhuriyet (Emrah Safa Gürkan)](transcripts/historik49_cagdaslasma_sekulerizm_cumhuriyet.md):** 52 dakikalık bölümün kapsamlı deşifresi, Niyazi Berkes'in sekülerizm tezleri ve modern devlet analizi.
 - **[Historik 14 - Diktatör Franco ve İspanya İç Savaşı (Emrah Safa Gürkan)](transcripts/historik14_diktator_franco_ispanya_ic_savasi.md):** 45 dakikalık bölümün detaylı analizi ve deşifresi.
 - **[Obsidian ile İkinci Beyin Part 1 & 2 (Baran Gözübüyük)](transcripts/combined_transcript.md):** Kişisel yapay zekâ dijital ikizi ve not alma mimarisi.
 
