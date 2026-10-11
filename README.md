@@ -81,6 +81,7 @@ python transcribe.py downloads/esczqaVKf-I.mp3 --model base --language tr --outp
 
 ## 📜 Hazır Transkriptler & Test Veri Seti
 
+- **[@gozubuyukbaran Mayıs 2026 Arşivi](transcripts/gozubuyukbaran_may_archive.md):** Baran Gözübüyük'ün Mayıs–Ekim 2026 arasında paylaştığı **45 videoluk tam set** (Obsidian, AI araçları, Claude, Cloudflare, Resend, DJI Neo 2 vb.) ve bağlantıları.
 - **[ESG Historik Test Veri Seti Kataloğu](transcripts/esg_historik_test_set.md):** 7 farklı Emrah Safa Gürkan dersinden oluşan ~6.5 saatlik ses test kümesi (Tüfek Mikrop ve Çelik, Hitler, Wallerstein, Habsburglar, Devletsiz Kapitalizm vb.) ve depolama karşılaştırmaları.
 - **[Historik 49 - Çağdaşlaşma, Sekülerizm ve Cumhuriyet (Emrah Safa Gürkan)](transcripts/historik49_cagdaslasma_sekulerizm_cumhuriyet.md):** 52 dakikalık bölümün kapsamlı deşifresi, Niyazi Berkes'in sekülerizm tezleri ve modern devlet analizi.
 - **[Historik 14 - Diktatör Franco ve İspanya İç Savaşı (Emrah Safa Gürkan)](transcripts/historik14_diktator_franco_ispanya_ic_savasi.md):** 45 dakikalık bölümün detaylı analizi ve deşifresi.
