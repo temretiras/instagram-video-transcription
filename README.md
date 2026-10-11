@@ -1,8 +1,15 @@
-# 🎙️ Instagram Video Transcriber & Second Brain Transcripts
+# 🎙️ Universal Media Transcriber (YouTube, Instagram & More)
 
-Bu depo, Instagram videolarından/Reels içeriklerinden doğrudan video/ses indiren, konuşmaları **Whisper** yapay zekâ modeli ile metne döken (Speech-to-Text) araçları ve örnek transkriptleri içerir.
+Bu proje; **YouTube**, **Instagram** ve diğer video platformlarından medya indiren, konuşmaları **Whisper** yapay zekâ modeli ile yüksek doğrulukla metne dönüştüren (Speech-to-Text) ve **depolamayı minimumda tutan** açık kaynaklı bir araç setidir.
 
-Depo içerisinde ayrıca **Baran Gözübüyük (@gozubuyukbaran)** tarafından yayınlanan *"Obsidian ile İkinci Beyin & Yapay Zekâ Dijital İkiz"* video serisinin tam metin transkriptleri yer almaktadır.
+---
+
+## ⚡ Neden Depolama Optimizasyonu?
+
+Görsel içermeyen konuşma deşifrelerinde 1080p video indirmek gigabaytlarca gereksiz veri ve bant genişliği tüketir. Bu projede:
+* **Varsayılan Mod (`audio`):** Yalnızca ses akışı (64–128 kbps MP3) indirilir. Örneğin 45 dakikalık bir YouTube videosu **~1.5 GB yerine yalnızca 21.7 MB** yer kaplar (%95+ depolama tasarrufu).
+* **Düşük Kalite Video Modu (`video_low`):** Görüntüye de ihtiyaç duyulursa 144p/240p gibi minimum çözünürlükte indirilir.
+* **FFmpeg Entegrasyonu:** `imageio-ffmpeg` sayesinde harici bir FFmpeg kurulumuna ihtiyaç kalmadan otomatik ses dönüştürme yapılır.
 
 ---
 
@@ -10,15 +17,16 @@ Depo içerisinde ayrıca **Baran Gözübüyük (@gozubuyukbaran)** tarafından y
 
 ```text
 instagram-video-transcription/
-├── downloader.py          # yt-dlp ile Instagram video ve ses indirme modülü
+├── downloader.py          # Çok amaçlı medya indirici (Audio / Low-Res / High-Res)
 ├── transcribe.py          # OpenAI Whisper / Faster-Whisper transkripsiyon modülü
-├── main.py                # Uçtan uca URL'den transkript çıkaran ana CLI aracı
-├── requirements.txt       # Gerekli Python bağımlılıkları
-├── .gitignore             # Büyük video dosyalarını (.mp4 vb.) hariç tutar
+├── main.py                # Tek komutla çalışan uçtan uca transkripsiyon aracı
+├── requirements.txt       # Gerekli Python bağımlılıkları (yt-dlp, imageio-ffmpeg, whisper)
+├── .gitignore             # Medya dosyalarını Git'ten hariç tutar
 └── transcripts/
-    ├── part1_obsidian_ikinci_beyin.md       # Part 1 transkripti
-    ├── part2_otomasyon_telegram_whisper.md  # Part 2 transkripti
-    └── combined_transcript.md               # Part 1 & 2 birleşik tam transkript
+    ├── historik14_diktator_franco_ispanya_ic_savasi.md # YouTube: ESG Historik 14 (45 dk)
+    ├── part1_obsidian_ikinci_beyin.md                  # Instagram: İkinci Beyin Part 1
+    ├── part2_otomasyon_telegram_whisper.md             # Instagram: İkinci Beyin Part 2
+    └── combined_transcript.md                          # Instagram serisi birleşik metin
 ```
 
 ---
@@ -40,34 +48,40 @@ instagram-video-transcription/
 
 ## 🛠️ Kullanım
 
-### 1. Tek Komutla URL'den Transkript Çıkarma (Önerilen)
+### 1. Tek Komutla URL'den Transkript Çıkarma (Varsayılan: Depolama Dostu MP3)
 ```bash
+# YouTube Videosu (Yalnızca ses indirir, metne dönüştürür):
+python main.py "https://www.youtube.com/watch?v=esczqaVKf-I"
+
+# Instagram Post / Reel:
 python main.py "https://www.instagram.com/p/DdO9AXNgVz-/"
 ```
-Bu komut videoyu `downloads/` klasörüne indirir, Whisper modeli ile konuşmaları deşifre eder ve sonucu `transcripts/` altına Markdown dosyası olarak kaydeder.
 
-### 2. Yalnızca Video/Ses İndirme
+### 2. Düşük Kalitede Video İndirerek Transkript Çıkarma (144p)
 ```bash
-# Videoyu indirmek için:
-python downloader.py "https://www.instagram.com/p/DdO9AXNgVz-/"
-
-# Yalnızca sesi (MP3) indirmek için:
-python downloader.py "https://www.instagram.com/p/DdO9AXNgVz-/" --audio-only
+python main.py "https://www.youtube.com/watch?v=..." --format video_low --max-height 144
 ```
 
-### 3. Yerel Bir Ses/Video Dosyasını Transkribe Etme
+### 3. Yalnızca İndirme (Transkripsiyonsuz)
 ```bash
-python transcribe.py downloads/video.mp4 --model base --language tr --output transkript.md
+# Sadece MP3 (64 kbps ses) indir:
+python downloader.py "https://www.youtube.com/watch?v=..." -f audio -b 64
+
+# En düşük kaliteli 144p video indir:
+python downloader.py "https://www.youtube.com/watch?v=..." -f video_low --max-height 144
+```
+
+### 4. Yerel Dosyayı Metne Dönüştürme
+```bash
+python transcribe.py downloads/esczqaVKf-I.mp3 --model base --language tr --output cikti.md
 ```
 
 ---
 
-## 📜 İçerik Transkriptleri
+## 📜 Hazır Transkriptler
 
-Hazır transkriptleri doğrudan `transcripts/` dizininden inceleyebilirsiniz:
-- **[Part 1 Transkripti](transcripts/part1_obsidian_ikinci_beyin.md):** Obsidian mimarisi, Claude ile klasör yapısı oluşturma, Wispr Flow toplantı notu entegrasyonu.
-- **[Part 2 Transkripti](transcripts/part2_otomasyon_telegram_whisper.md):** Telegram botu + Whisper ile sesli/yazılı not alma, Claude Inbox işleme ve AI ajanlar için dijital kimlik vizyonu.
-- **[Birleşik Tam Transkript](transcripts/combined_transcript.md):** Her iki bölümün ardışık tam metni.
+- **[Historik 14 - Diktatör Franco ve İspanya İç Savaşı (Emrah Safa Gürkan)](transcripts/historik14_diktator_franco_ispanya_ic_savasi.md):** 45 dakikalık bölümün detaylı analizi ve deşifresi.
+- **[Obsidian ile İkinci Beyin Part 1 & 2 (Baran Gözübüyük)](transcripts/combined_transcript.md):** Kişisel yapay zekâ dijital ikizi ve not alma mimarisi.
 
 ---
 
