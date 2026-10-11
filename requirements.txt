@@ -1,0 +1,4 @@
+yt-dlp>=2026.08.19
+openai-whisper>=20231117
+# faster-whisper is also recommended for fast inference:
+# faster-whisper>=1.0.0
